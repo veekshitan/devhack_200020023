@@ -5,12 +5,13 @@ from .postgres_operations import get_user_by_roll_number
 
 def send_email_to_seller(buyer_roll_number, item_name, seller_name, seller_email_id):
     buyer_details = get_user_by_roll_number(buyer_roll_number)
-    buyer_name = buyer_details.name
-    buyer_email_id = buyer_details.email
-    buyer_contact_no: buyer_details.contact_no
+    print(buyer_details)
+    buyer_name = buyer_details['name']
+    buyer_email_id = buyer_details['email']
+    buyer_contact_no= buyer_details['contact_number']
     
-    sender_email = "your@gmail.com" 
-    sender_password = "your_password"  # Replace with your email password
+    sender_email = "200030010@iitdh.ac.in" 
+    sender_password = "oscv spfa dzpr mlms"  # Replace with your email password
 
         # Create the email content
     subject = "Subject: Your Subject"
