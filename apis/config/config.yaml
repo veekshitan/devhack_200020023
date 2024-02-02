@@ -1,0 +1,7 @@
+port: 8000
+host: 0.0.0.0
+postgres_user: "postgres"
+postgres_password: "root"
+postgres_host: "localhost"
+postgres_port: "5432" 
+postgres_dbname: "campusconnectdb"
