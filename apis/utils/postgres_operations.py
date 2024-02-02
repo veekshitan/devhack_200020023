@@ -34,7 +34,6 @@ def get_events_by_event_name(event_name):
     return session.query(events_table).filter(events_table.name==event_name).first()
 
 def add_coupon(roll_no,category):
-    print("cooupons adding here")
     session.add(copouns(roll_no=roll_no,category=category))
     session.commit()
 
