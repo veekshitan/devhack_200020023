@@ -74,7 +74,7 @@ def delete_coupon_with_rollno_and_category(roll_no, category):
     session.commit()
 
 def delete_event_by_name_and_rollno(roll_no, name):
-    conditionVy = and_(events_table.roll_no == roll_no, events_table.name == name)
+    conditionVy = and_(events_table.name == name)
     delete_stmt=delete(events_table).where(conditionVy)
     session.execute(delete_stmt)
     session.commit()
@@ -83,3 +83,6 @@ def filter_items_by_category(category):
     get_category_data_with_users=session.query(items, user_table).filter(items.category==category).join(items, user_table.roll_no == items.roll_no)
     item_details =get_category_data_with_users.all()
     return item_details
+
+def coupons_data():
+    return session.query(copouns).all()

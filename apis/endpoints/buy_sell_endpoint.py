@@ -8,7 +8,7 @@ from models.delete_item_model import DeleteItemModel
 from models.get_items_model import ItemsModel
 from utils.sell_item import saveSaleItem, delete_item
 from utils.get_item import get_all_items_in_category
-
+from utils.coupons_utils import download_csv
 router=APIRouter()
 
 @router.post("/getItems")
@@ -33,3 +33,8 @@ async def sellItem(request: SellModel):
 async def del_item(request: DeleteItemModel):
     return delete_item(request.good_number)
     
+@router.post("/getCSV")
+async def get_csv():
+    res = (download_csv())
+    print([i.__dict__ for i in res])
+    return [i.__dict__ for i in res]

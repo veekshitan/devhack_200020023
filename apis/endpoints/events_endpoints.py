@@ -16,6 +16,7 @@ async def get_events_by_main_event(event_name:str):
 async def events():
     return get_events()
 
-@router.delete("/events")
+@router.post("/deleteEvents")
 async def del_event(request: DeleteEventModel):
+    print(request)
     return delete_event(request.roll_no, request.name)
