@@ -77,3 +77,7 @@ def delete_event_by_name_and_rollno(roll_no, name):
     delete_stmt=delete(events_table).where(conditionVy)
     session.execute(delete_stmt)
     session.commit()
+
+def filter_items_by_category(category):
+    item_details = session.query(items).filter(items.category==category).all()
+    return item_details
