@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Request
 from utils.buy_item import send_email_to_seller
 from utils.postgres_operations import getSellerEmailID
 from models.buy_model import UserBuyModel
+import json
 from models.sell_model import SellModel
 from models.delete_item_model import DeleteItemModel
 from models.get_items_model import ItemsModel
@@ -12,7 +13,11 @@ router=APIRouter()
 
 @router.post("/getItems")
 async def getItemByCategory(request: ItemsModel):
-    return get_all_items_in_category(request.category)
+    print(request.category, "this is the category we get")
+    res = get_all_items_in_category(request.category)
+    print(res, "this is thr ressssss")
+    print([{**i.__dict__, **j.__dict__} for i,j in res])
+    return [{**i.__dict__, **j.__dict__} for i,j in res]
 
 @router.post("/buyitem")
 async def buyItem(request: UserBuyModel):
@@ -22,7 +27,7 @@ async def buyItem(request: UserBuyModel):
     
 @router.post("/sellitem")
 async def sellItem(request: SellModel):
-   return saveSaleItem(request.roll_number, request.category, request.item_name, request.cost, request.images, request.unique_good_number)
+   return saveSaleItem(request.roll_number, request.category, request.item_name, request.cost, request.images)
     
 @router.delete("/sellitem")
 async def del_item(request: DeleteItemModel):

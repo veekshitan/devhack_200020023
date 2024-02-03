@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, String, String, MetaData, JSON, Boolean,PrimaryKeyConstraint
+from sqlalchemy import create_engine, Column, String, String, MetaData, JSON, Boolean,PrimaryKeyConstraint,Integer
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.dialects.postgresql import JSONB
@@ -46,12 +46,12 @@ class buy_copouns(Base):
 
 class items(Base):
     __tablename__ = 'items'
-    roll_no = Column(String, primary_key=True)
+    roll_no = Column(String)
     category = Column(String)
     item_name = Column(String)
     cost = Column(String)
     images = Column(String)
-    unique_good_number = Column(String)
+    unique_good_number = Column(Integer, primary_key = True,autoincrement=True)
     
 class DatabaseManager:
     _instance = None

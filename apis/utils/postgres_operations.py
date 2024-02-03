@@ -23,9 +23,10 @@ def add_event(roll_number,name, description,image,website_link,sub_events):
     session.add(events_table(roll_no=roll_number,name=name,description=description,image=image,website_link=website_link,sub_events=sub_events))
     session.commit()
 
-def addSaleItem(roll_number, category, item_name, cost, images, unique_good_number):
-    session.add(items(roll_no=roll_number, category=category, item_name=item_name, cost=cost, images=images,unique_good_number=unique_good_number))
+def addSaleItem(roll_number, category, item_name, cost, images):
+    session.add(items(roll_no=roll_number, category=category, item_name=item_name, cost=cost, images=images))
     session.commit()
+
 
 def get_all_events():
     return session.query(events_table).all()
@@ -79,5 +80,6 @@ def delete_event_by_name_and_rollno(roll_no, name):
     session.commit()
 
 def filter_items_by_category(category):
-    item_details = session.query(items).filter(items.category==category).all()
+    get_category_data_with_users=session.query(items, user_table).filter(items.category==category).join(items, user_table.roll_no == items.roll_no)
+    item_details =get_category_data_with_users.all()
     return item_details
