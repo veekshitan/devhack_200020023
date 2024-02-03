@@ -3,7 +3,8 @@ from utils.buy_item import send_email_to_seller
 from utils.postgres_operations import getSellerEmailID
 from models.buy_model import UserBuyModel
 from models.sell_model import SellModel
-from utils.sell_item import saveSaleItem
+from models.delete_item_model import DeleteItemModel
+from utils.sell_item import saveSaleItem, delete_item
 
 router=APIRouter()
 
@@ -15,4 +16,8 @@ async def buyItem(request: UserBuyModel):
 @router.post("/sellitem")
 async def sellItem(request: SellModel):
    return saveSaleItem(request.roll_number, request.category, request.item_name, request.cost, request.images, request.unique_good_number)
+    
+@router.delete("/sellitem")
+async def del_item(request: DeleteItemModel):
+    return delete_item(request.good_number)
     

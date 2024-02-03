@@ -1,6 +1,6 @@
 from core.settings import POSTGRES_USER, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_PASSWORD, POSTGRES_DBNAME
-from core.postgres_connection import DatabaseManager, user_table, events_table, copouns, buy_copouns,items
-from sqlalchemy import func,text, desc,cast, String, Date,and_
+from core.postgres_connection import DatabaseManager, user_table, events_table, copouns, buy_copouns, items
+from sqlalchemy import func,text, desc,cast, String, Date, and_, delete
 import json
 
 db_url = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DBNAME}"
@@ -61,3 +61,19 @@ def getSellerEmailID(good_number):
         print(f"Item not found for good number: {good_number}")
         return None
   
+def delete_item_with_good_number(good_number):
+    delete_stmt=delete(items).where(items.unique_good_number==good_number)
+    session.execute(delete_stmt)
+    session.commit()
+
+def delete_coupon_with_rollno_and_category(roll_no, category):
+    conditionV =  and_(copouns.roll_no == roll_no, copouns.category == category)
+    delete_stmt=delete(copouns).where(conditionV)
+    session.execute(delete_stmt)
+    session.commit()
+
+def delete_event_by_name_and_rollno(roll_no, name):
+    conditionVy = and_(events_table.roll_no == roll_no, events_table.name == name)
+    delete_stmt=delete(events_table).where(conditionVy)
+    session.execute(delete_stmt)
+    session.commit()
