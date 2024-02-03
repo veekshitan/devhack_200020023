@@ -35,6 +35,8 @@ In the `./apis/config/config.yaml` file, configure the PostgreSQL information su
 - Make sure to manage your virtual environment properly to avoid conflicts.
 - Keep the PostgreSQL installation up-to-date and configured according to your needs.
 
+Demo Video [here](https://youtu.be/oADbo3I208k)
+
 Feel free to reach out for any assistance or troubleshooting.
 
 Feel free to explore the limitless possibilities of Campus Connect! 🚀
